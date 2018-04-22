@@ -362,6 +362,8 @@ Here, we have provided **four possible colours** for the user to choose. We have
 
 Finally, our extension is done! Yay! :D 
 
+**UPDATE**: the line `page.appendChild(button)` results in an undefined error for the variable _page_. Instead, replace this line with `document.body.appendChild(button)`.
+
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
 * For a guide targeted towards **developers**, Google has also provided a [developer guide](https://developer.chrome.com/extensions/devguide).  
