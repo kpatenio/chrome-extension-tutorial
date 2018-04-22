@@ -215,7 +215,37 @@ We can always displays icons for our extensions in other places including the ex
 Now if reload our extension, we will be able to see our icon in the extensions management page.  
 
 ### Using Scripts with Our Toolbar Icon
-You might have noticed that the icon for our extension is greyed-out. 
+You might have noticed that the icon for our extension is greyed-out. The reason why the icon is greyed-out is because the extension is currently not available to users - you can refer to this link here: https://developer.chrome.com/extensions/user_interface#page. 
+
+To make our extension available, we must define some rules that determine when our extension is usable. We must **call [chrome.declarativeContent](https://developer.chrome.com/extensions/declarativeContent)** inside our `runtime.onInstalled` listener, which is located in our _background.js_ file. We will update our file into the following:
+
+```
+  chrome.runtime.onInstalled.addListener(function() {
+    chrome.storage.sync.set({color: '#3aa757'}, function() {
+      console.log('The color is green.');
+    });
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+      chrome.declarativeContent.onPageChanged.addRules([{
+        conditions: [new chrome.declarativeContent.PageStateMatcher({
+          pageUrl: {hostEquals: 'developer.chrome.com'},
+        })
+        ],
+            actions: [new chrome.declarativeContent.ShowPageAction()]
+      }]);
+    });
+  });
+```
+In addition to this, we must also update our manifest file and give our extension **permission to access the declarativeContent API**:
+
+```
+  {
+    "name": "Getting Started Example",
+  ...
+    "permissions": ["declarativeContent", "storage"],
+  ...
+  }
+```
+Once we reload our extension again, our 
 
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
@@ -229,7 +259,7 @@ You might have noticed that the icon for our extension is greyed-out.
 <sup>1</sup>. “Manifest File”, Wikipedia, https://en.wikipedia.org/wiki/Manifest_file, (June 22, 2017)
 
 ## License 
-The tutorial provided by Google is licensed under [CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/); no alterations were made to the web page, but code provided from the tutorial have been altered (please see the MIT license provided below).
+The tutorial provided by Google is licensed under [CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/); no alterations were made to the web page, but code provided from the tutorial have been altered.
 
 The source code in this repository is licensed under the MIT license:
 
@@ -237,7 +267,7 @@ The source code in this repository is licensed under the MIT license:
 
 MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) 2018 Katherine Mae Patenio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
