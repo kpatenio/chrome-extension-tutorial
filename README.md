@@ -374,7 +374,7 @@ Finally, our extension is done! Yay! :D
 <sup>1</sup>. “Manifest File”, Wikipedia, https://en.wikipedia.org/wiki/Manifest_file, (June 22, 2017)
 
 ## License 
-The tutorial provided by Google is licensed under [CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/); no alterations were made to the web page, but code provided from the tutorial have been altered.
+The tutorial provided by Google is licensed under [CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/); no alterations were made to the web page, but code provided from the tutorial has been altered.
 
 The source code in this repository is licensed under the MIT license:
 
