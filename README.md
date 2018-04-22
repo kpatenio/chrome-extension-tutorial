@@ -37,7 +37,7 @@ Create a JSON file for your manifest.
 ```
 Here, we have stated what the _name_ of our extension will be, what _version_ it currently is (this is determined by the developer), a _description_ about our extension, and the _manifest version_ as 2. Note that a manifest version of 1 is no longer supported for Chrome extensions - click this [link](https://developer.chrome.com/apps/manifestVersion) for more information.  
 
-### Adding Functionality to Our Extension
+### Adding Functionality to Our Extension - The Script
 Once we open our extension in Chrome (via developer mode), we will now have the ability to install our newly created extension! However,
 there is not much we can do with it. If we want it do something, we must add some scripts. All scripts for our extension are written in JavaScript files. 
 
@@ -57,24 +57,44 @@ In our _background.js_ file, we added a script that will allow our extension to 
 #### What did we just do?
 All we did was create a listener that checks if we are installing our extension for the first time, when the extension is updated, _or_ when Chrome is updated. When the listener successfully finds one of mentioned events, we will simply save a key-value property `{color: '#3aa757'}` to storage so that - in the future - we can let other components make use of that value and update it when necessary.
 
-Note we also have a second function _inside_ our first function that prints to the console. This function is a **callback** function. And according to the [offical documentation](https://developer.chrome.com/apps/runtime#event-onInstalled) for `runtime.onInstalled.addListener`, our callback simply contains details for as to why an event occurs.    
+Note we also have a second function _inside_ our first function that prints to the console. This function is a **callback** function. According to the [offical documentation](https://developer.chrome.com/apps/runtime#event-onInstalled) for `runtime.onInstalled.addListener`, our callback simply contains details for as to why an event occurs. However, what this really does is just print to console once we finish using our storage. 
+
+**Tip**: This [link](https://groups.google.com/a/chromium.org/forum/#!topic/chromium-extensions/XOUXL2X9Qyk) might help in understanding what a callback really is.
 
 #### What is _runtime_? 
 _runtime_ is a Chrome API that can be used to listen for events during our extension's lifetime. The offical documentation states that it is also used to get pages, return manifest details, and convert URL relative paths to full URLs.  
 
 For more information on _runtime_, click [here](https://developer.chrome.com/apps/runtime).
 
+### Adding Functionality to Our Extension - The Manifest
 
-
-The extension is now aware that it includes a non-persistent background script and will scan the registered file for important events it needs to listen for.
-
-This extension will need information from a persistent variable as soon as its installed. Start by including a listening event for runtime.onInstalled in the background script. Inside the onInstalled listener, the extension will set a value using the storage API. This will allow multiple extension components to access that value and update it.
+#### Scripts
+Note that any scripts that we want to include in our extension must be declared in our manifest. We will now update our manifest:
 
 ```
   {
     "name": "Getting Started Example",
     "version": "1.0",
     "description": "Build an Extension!",
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "manifest_version": 2
+  }
+```
+Notice that we added a _background_ key with values of `"scripts":["background.js"]` and `"persistent": false`. All we've done is simply declare what script should run in the background and declare that script as non-persistent. Since it is non-persistent, our script will not continue to run for a long time (so stop running after an event has been found). 
+
+Now the extension knows that it has this background script. It will be used to listen for the appropriate event(s).
+
+#### Storage
+
+```
+  {
+    "name": "Getting Started Example",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "permissions": ["storage"],
     "background": {
       "scripts": ["background.js"],
       "persistent": false
