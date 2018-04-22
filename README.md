@@ -151,7 +151,7 @@ It is essential that we **declare our html file** in our manifest. We will decla
     "manifest_version": 2
   }
 ```
-What we have done is simply let our popup appear on the toolbar on the _current_ page. This will be our **default popup**.  
+We have simply declared our **default popup**.  
 
 #### Icons For Our Toolbar 
 We can add icons on our **toolbar** for our extension by utilizing *page_action*. Note that if we want to disable icons, we would also use *page_action*. We will need to update our manifest file again and declare our **default icons**:
@@ -179,6 +179,40 @@ We can add icons on our **toolbar** for our extension by utilizing *page_action*
   }
 ```
 Our key `"default_icon"` contains multiple images of sizes 16x16, 32x32, 48x48, and 128x128. We need to specify the relative paths of the images we wish to use. Now our extension will display an icon on our toolbar. 
+
+#### Icons for Other Places 
+We can always displays icons for our extensions in other places including the extension management page, permissions warning, and favicon/shortcut icon. We will add another property called **icons**. 
+Extensions also display images on the extension management page, the permissions warning, and favicon/shortcut icon. These images are designated in the manifest under icons.
+
+```
+  {
+    "name": "Getting Started Example",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "permissions": ["storage"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "page_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/get_started16.png",
+        "32": "images/get_started32.png",
+        "48": "images/get_started48.png",
+        "128": "images/get_started128.png"
+      }
+    },
+    "icons": {
+      "16": "images/get_started16.png",
+      "32": "images/get_started32.png",
+      "48": "images/get_started48.png",
+      "128": "images/get_started128.png"
+    },
+    "manifest_version": 2
+  }
+```
+Now if reload our extension, we will be able to see our icon in the extensions management page.  
 
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
