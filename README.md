@@ -275,7 +275,36 @@ However, note that we must also update our _popup.html_ file to include this scr
   </body>
 </html>
 ```
-Now the button should finally be working! :) 
+Now the button should finally show the colour green! :) 
+
+### Using Scripts to Change Background Colour 
+If we were to press the button after our previous step, the button would still do nothing. We simply managed to change the colour of our button. Now we need to add more functionality and update our _popup.js_ file to the following: 
+
+```
+  changeColor.onclick = function(element) {
+    let color = element.target.value;
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.executeScript(
+          tabs[0].id,
+          {code: 'document.body.style.backgroundColor = "' + color + '";'});
+    });
+  };
+```
+Here, we've added an **onclick event** for the button. When the button is clicked, the script `changeColor.onclick` will be triggered. What our script is **content script** that is [programmatically injected](https://developer.chrome.com/extensions/content_scripts#pi). We use this type of injection if we wish to inject CSS or JavaScript into a page **under a certain conditions initiated by the user**. In this case, we only want our script to run when the button is clicked. 
+
+To make use of programmatic injection, we must ensure that the extension has [cross-origin permissions](https://developer.chrome.com/extensions/xhr#requesting-permission) (permission to make HTTP requests with a server) and has permission to temporarily access the [tabs API](https://developer.chrome.com/extensions/tabs).
+
+Note that we only need to make use of the _tabs API_ for this extension. Thus, we should update our manifest to allow [activeTab](https://developer.chrome.com/extensions/activeTab) for temporary access:
+
+```
+  {
+    "name": "Getting Started Example",
+  ...
+    "permissions": ["activeTab", "declarativeContent", "storage"],
+  ...
+  }
+```
+Note that this will let our extension call [tabs.executeScript](https://developer.chrome.com/extensions/tabs#method-executeScript). This will **allow our JavaScript to be injected** into the current page. Once we refresh the extension, we will finally be able to change the colour of the web page's background! 
 
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
