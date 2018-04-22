@@ -306,13 +306,67 @@ Note that we only need to make use of the _tabs API_ for this extension. Thus, w
 ```
 Note that this will let our extension call [tabs.executeScript](https://developer.chrome.com/extensions/tabs#method-executeScript). This will **allow our JavaScript to be injected** into the current page. Once we refresh the extension, we will finally be able to change the colour of the web page's background! 
 
+### Options to Add Different Colours
+Our extension only changes the background to one colour. What if we wanted a different one? We allow users to choose what colour they want by displaying an **options page**. We will create a file called _options.html_:
+
+```
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <style>
+        button {
+          height: 30px;
+          width: 30px;
+          outline: none;
+          margin: 10px;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="buttonDiv">
+      </div>
+    </body>
+    <script src="options.js"></script>
+  </html>
+```
+We have provided the structure of our options page. However, we should still declare it in our manifest:
+
+```
+  {
+    "name": "Getting Started Example",
+    ...
+    "options_page": "options.html",
+    ...
+    "manifest_version": 2
+  }
+```
+When we reload our extension, we can go to the extension's details. We can see that we've enabled options for our extension. However, when we click on it, we will be lead to a blank page. We must some functionality for our options page. Create a file _options.js_:
+
+```
+  const kButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1']
+  function constructOptions(kButtonColors) {
+    for (let item of kButtonColors) {
+      let button = document.createElement('button');
+      button.style.backgroundColor = item;
+      button.addEventListener('click', function() {
+        chrome.storage.sync.set({color: item}, function() {
+          console.log('color is ' + item);
+        })
+      });
+      page.appendChild(button);
+    }
+  }
+  constructOptions(kButtonColors);
+```
+Here, we have provided **four possible colours** for the user to choose. We have also created buttons for each individual colour and added onclick event listeners for each button. When a button is clicked, the **storage is updated** to the chosen colour. No other values need to be updated since we are simply reading from storage. 
+
+Finally, our extension is done! Yay! :D 
+
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
 * For a guide targeted towards **developers**, Google has also provided a [developer guide](https://developer.chrome.com/extensions/devguide).  
 * Have trouble **debugging**? Please see Google's tutorial on [debugging here](https://developer.chrome.com/apps/tut_debugging).
 * Want to use **APIs** with your extension? Google's got your back [here](https://developer.chrome.com/apps/api_index)! 
-
-
 
 ## Citations
 <sup>1</sup>. “Manifest File”, Wikipedia, https://en.wikipedia.org/wiki/Manifest_file, (June 22, 2017)
