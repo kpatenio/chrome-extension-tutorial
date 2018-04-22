@@ -261,7 +261,21 @@ When you click on the extension icon on a _developer.chrome.com_ page, you will 
     changeColor.setAttribute('value', data.color);
   });
 ```
-Here, we have created a variable that will contain our button element (which has an id of "changeColor").  Then, we would finally **read from storage** and read the colour that we have stored upon installing/updating our extension/Chrome. After reading the colour, we change the button's colour to the colour we received from storage. Note that we would use `data.color` since we originally had a key of _color_ in our initial `{color: "green"}` object. Finally, we will change the background of the current web page by setting the **value** of our button to the colour. Therefore, when the button is clicked, the colour will change.
+Here, we have created a variable that will contain our button element (which has an id of "changeColor").  Then, we would finally **read from storage** and read the colour that we have stored upon installing/updating our extension/Chrome. After reading the colour, we change the button's colour to the colour we received from storage. Note that we would use `data.color` since our parameter is _data_ and we originally had a key of _color_ in our initial `{color: "green"}` object. Finally, to be able to change the background of the current page to the selected colour, we will set the **value** of our button to the colour. Therefore, when the button is clicked, the colour will change.
+
+However, note that we must also update our _popup.html_ file to include this script. We will update our html file to the following:
+
+```
+<!DOCTYPE html>
+<html>
+...
+  <body>
+    <button id="changeColor"></button>
+    <script src="popup.js"></script>
+  </body>
+</html>
+```
+Now the button should finally be working! :) 
 
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
