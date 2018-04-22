@@ -41,7 +41,7 @@ Here, we have stated what the _name_ of our extension will be, what _version_ it
 Once we open our extension in Chrome (via developer mode), we will now have the ability to install our newly created extension! However,
 there is not much we can do with it. If we want it do something, we must add some scripts. All scripts for our extension are written in JavaScript files. 
 
-Let's add a background script! First, we must create a JavaScript file. We can call it _background.js_. We will include the following in our JavaScript file:
+Let's add a background script! First, we must create a JavaScript file. We can call it _background.js_. We will include the following in our JavaScript file to **create a listener**:
 
 ```
   chrome.runtime.onInstalled.addListener(function() {
@@ -50,9 +50,19 @@ Let's add a background script! First, we must create a JavaScript file. We can c
     });
   });
 ```
-In our _background.js_ file, we added a script that will allow our extension to listen for a [runtime.onInstalled](https://developer.chrome.com/apps/runtime#event-onInstalled) event. Inside this listener that we just defined, our extension will save `{color: '#3aa757'}` into storage via the [Storage API](https://developer.chrome.com/apps/storage) 
+In our _background.js_ file, we added a script that will allow our extension to listen for a [runtime.onInstalled](https://developer.chrome.com/apps/runtime#event-onInstalled) event. Inside this listener that we just defined, our extension will save `{color: '#3aa757'}` into storage via the [Storage API](https://developer.chrome.com/apps/storage).
 
 **Tip**: think of localStorage in JavaScript! 
+
+#### What did we just do?
+All we did was create a listener that checks if we are installing our extension for the first time, when the extension is updated, _or_ when Chrome is updated. When the listener successfully finds one of mentioned events, we will simply save a key-value property `{color: '#3aa757'}` to storage so that - in the future - we can let other components make use of that value and update it when necessary.
+
+Note we also have a second function _inside_ our first function that prints to the console. This function is a **callback** function. And according to the [offical documentation](https://developer.chrome.com/apps/runtime#event-onInstalled) for `runtime.onInstalled.addListener`, our callback simply contains details for as to why an event occurs.    
+
+#### What is _runtime_? 
+_runtime_ is a Chrome API that can be used to listen for events during our extension's lifetime. The offical documentation states that it is also used to get pages, return manifest details, and convert URL relative paths to full URLs.  
+
+For more information on _runtime_, click [here](https://developer.chrome.com/apps/runtime).
 
 
 
