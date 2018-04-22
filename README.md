@@ -83,11 +83,12 @@ Note that any scripts that we want to include in our extension must be declared 
     "manifest_version": 2
   }
 ```
-Notice that we added a _background_ key with values of `"scripts":["background.js"]` and `"persistent": false`. All we've done is simply declare what script should run in the background and declare that script as non-persistent. Since it is non-persistent, our script will not continue to run for a long time (so stop running after an event has been found). 
+Notice that we added a _background_ key with values of `"scripts":["background.js"]` and `"persistent": false`. All we've done is simply declare what script should run in the background and declare that script as non-persistent. Since it is non-persistent, our script will no longer continue to run for a long duration (so stop running after an event has been found in this case). 
 
 Now the extension knows that it has this background script. It will be used to listen for the appropriate event(s).
 
 #### Storage
+To use the Storage API, it is necessary to give our extension **permission** to access storage. Registering under _permissions_ in our manigest is needed for most APIs.  
 
 ```
   {
