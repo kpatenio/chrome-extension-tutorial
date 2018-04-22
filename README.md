@@ -245,7 +245,10 @@ In addition to this, we must also update our manifest file and give our extensio
   ...
   }
 ```
-Once we reload our extension again, our 
+Once we reload our extension again, our icon will no longer be grey if we are in a webpage with the URL host _developer.chrome.com_. Otherwise, if we are on another page, our icon will be grey. 
+
+#### What Does Our New Script Do?
+The code we inserted into our _background.js_ file simply **replaces our old rules** (if any) and replaces them with new ones. The `conditions` key in our new rule states **when to run the new rules**. In this case, we will run our extension's page action (recall our **popup** declared in our manifest) - which is specified by `actions` - when the host of our URL is _developer.chrome.com_. Reading the hostname is specified by `pageUrl`. 
 
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
