@@ -2,18 +2,24 @@
 My first attempt at creating a Chrome web extension using Google's official [tutorial](https://developer.chrome.com/extensions/getstarted). 
 
 ## What Does an Extension Need?
-An extension is made up of several **components** and a JSON **manifest** file. 
+An extension is made up of several **components** - particularly HTML and JavaScript files - and a JSON **manifest** file. 
 
-### What is a Manifest File?
+### Manifest File
 According to _Wikipedia_, a manifest file is "a file containing **metadata** for a group of accompanying files that are part of a set or coherent unit<sup>1</sup>. 
 
 The manifest file contains important information for our extension. It can contain our extension [name](https://developer.chrome.com/apps/manifest/name#name), the current [version](https://developer.chrome.com/apps/manifest/version) of our extension and manifest, [icons](https://developer.chrome.com/apps/manifest/icons), and more.
 
-A manifest file is required for both Chrome extensions and Chrome web applications. Note that what the manifest file contains may differ. For more information, you can refer to the links below:
+This particular JSON file is used for both Chrome extensions and Chrome web applications. Note that what the file contains may differ depending on what we're developing. The following links may be useful:
 * Web applications: https://developer.chrome.com/apps/manifest
 * Web extensions: https://developer.chrome.com/extensions/manifest
 
-### 
+### User Interface
+We can make our extension look different, be activated, or open a new menu after a particular action or state. We can use **HTML** to define the structure of a [popup](https://developer.chrome.com/extensions/user_interface#popup) or of a new page that will [override](https://developer.chrome.com/extensions/override) another one. 
+
+To run and create scripts that help in changing our extension's appearance after an action, we use **JavaScript**. The manifest must also be updated, especially when activating an extension for [**all** pages](https://developer.chrome.com/extensions/browserAction) _or_ activating an extension for [**some** pages](https://developer.chrome.com/extensions/pageAction).
+
+More information can be found at: https://developer.chrome.com/extensions/user_interface
+
 
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
@@ -22,4 +28,6 @@ A manifest file is required for both Chrome extensions and Chrome web applicatio
 * Want to use **APIs** with your extension? Google's got your back [here](https://developer.chrome.com/apps/api_index)! 
 
 ## License
+
+## Citations
 <sup>1</sup>. “Manifest File”, Wikipedia, https://en.wikipedia.org/wiki/Manifest_file, (June 22, 2017)
