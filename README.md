@@ -14,7 +14,7 @@ The manifest file contains important information for our extension. It can conta
 ### Component - User Interface
 We can make our extension look different, be activated, or open a new menu after a particular action or state. We can use **HTML** to define the structure of a [popup](https://developer.chrome.com/extensions/user_interface#popup) or of a new page that will [override](https://developer.chrome.com/extensions/override) another one. 
 
-To run and create scripts (see _Component - Scripts and Pages_) that help in changing our extension's appearance after an action, we use **JavaScript**. The manifest must also be updated, especially when activating an extension for [**all** pages](https://developer.chrome.com/extensions/browserAction) _or_ activating an extension for [**some** pages](https://developer.chrome.com/extensions/pageAction).
+To run and create scripts (see _Component - Scripts and Pages_) that help in changing our extension's appearance after an action, we use **JavaScript**. The manifest must also be updated, especially when activating an extension for [**all** pages](https://developer.chrome.com/extensions/browserAction) via browserAction or activating an extension for [**some** pages](https://developer.chrome.com/extensions/pageAction) via pageAction.
 
 More information can be found at: https://developer.chrome.com/extensions/user_interface
 
@@ -133,8 +133,52 @@ We will create a popup for our extension. Since popups are created using HTML, w
 ```
 We have defined the structure of our popup. Even though it is structured using HTML, do not confuse this for an actual webpage! Also note that we have a defined a _button_. We will use this button later to change the colour of pages.
 
-#### 
+It is essential that we **declare our html file** in our manifest. We will declare it under [page_action](https://developer.chrome.com/extensions/pageAction). Our updated manifest will appear as the following:
 
+```
+  {
+    "name": "Getting Started Example",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "permissions": ["storage"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "page_action": {
+      "default_popup": "popup.html",
+    },
+    "manifest_version": 2
+  }
+```
+What we have done is simply let our popup appear on the toolbar on the _current_ page. This will be our **default popup**.  
+
+#### Icons For Our Toolbar 
+We can add icons on our **toolbar** for our extension by utilizing *page_action*. Note that if we want to disable icons, we would also use *page_action*. We will need to update our manifest file again and declare our **default icons**:
+
+```
+ {
+    "name": "Getting Started Example",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "permissions": ["storage"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "page_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/get_started16.png",
+        "32": "images/get_started32.png",
+        "48": "images/get_started48.png",
+        "128": "images/get_started128.png"
+      }
+    },
+    "manifest_version": 2
+  }
+```
+Our key `"default_icon"` contains multiple images of sizes 16x16, 32x32, 48x48, and 128x128. We need to specify the relative paths of the images we wish to use. Now our extension will display an icon on our toolbar. 
 
 ## More Resources
 * Google provides much more detailed information about the overall **architecture** of extensions, which can be found [here](https://developer.chrome.com/extensions/overview). 
