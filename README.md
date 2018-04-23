@@ -2,7 +2,7 @@
 My first attempt at creating a Chrome web extension using Google's official [tutorial](https://developer.chrome.com/extensions/getstarted). This extension allows a user to change the colour of a page on [developer.chrome.com](https://developer.chrome.com/home). 
 
 ## What Does an Extension Need?
-(Note: The actual tutorial begins at [_Getting Started with the Tutorial_](https://github.com/kpatenio/chrome-extension-tutorial#getting-started-with-the-tutorial).)
+(Note: The actual tutorial begins at [_Getting Started with the Tutorial_](#getting-started-with-the-tutorial))
 
 An extension is made up of several **components** - particularly HTML and JavaScript files - and a JSON **manifest** file. 
 
