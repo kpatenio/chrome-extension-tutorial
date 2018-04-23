@@ -16,7 +16,7 @@ The manifest file contains important information for our extension. It can conta
 ### Component - User Interface
 We can make our extension look different, be activated, or open a new menu after a particular action or state. We can use **HTML** to define the structure of a [popup](https://developer.chrome.com/extensions/user_interface#popup) or of a new page that will [override](https://developer.chrome.com/extensions/override) another one. 
 
-To run and create scripts (see _Component - Scripts and Pages_) that help in changing our extension's appearance after an action, we use **JavaScript**. The manifest must also be updated, especially when activating an extension for [**all** pages](https://developer.chrome.com/extensions/browserAction) via browserAction or activating an extension for [**some** pages](https://developer.chrome.com/extensions/pageAction) via pageAction.
+To run and create scripts (see [_Component - Scripts and Pages_](#component---scripts-and-pages)) that help in changing our extension's appearance after an action, we use **JavaScript**. The manifest must also be updated, especially when activating an extension for [**all** pages](https://developer.chrome.com/extensions/browserAction) via browserAction or activating an extension for [**some** pages](https://developer.chrome.com/extensions/pageAction) via pageAction.
 
 More information can be found at: https://developer.chrome.com/extensions/user_interface
 
