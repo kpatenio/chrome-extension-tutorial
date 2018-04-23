@@ -181,7 +181,7 @@ We can add icons on our **toolbar** for our extension by utilizing *page_action*
 Our key `"default_icon"` contains multiple images of sizes 16x16, 32x32, 48x48, and 128x128. We need to specify the relative paths of the images we wish to use. Now our extension will display an icon on our toolbar. 
 
 #### Icons for Other Places 
-We can always displays icons for our extensions in other places including the extension management page, permissions warning, and favicon/shortcut icon. We will add another property called **icons**. 
+We can also display icons for our extensions in other places including the extension management page, permissions warning, and favicon/shortcut icon. We will add another property called **icons**. 
 
 ```
   {
