@@ -378,4 +378,4 @@ Finally, our extension is done! Yay! :D
 ## License 
 The tutorial provided by Google is licensed under [CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/); no alterations were made to the web page, but code provided from the tutorial has been altered.
 
-The source code in this repository is licensed under the MIT license.
+The source code in this repository is licensed under the [MIT license](/LICENSE).
